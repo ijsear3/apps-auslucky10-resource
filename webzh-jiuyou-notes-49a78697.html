@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>九游娱乐 · 日常查询与延伸阅读</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background-color: #f3f4f6;
+      color: #1e293b;
+      line-height: 1.7;
+      padding: 2rem 1.2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 980px;
+      width: 100%;
+    }
+
+    /* hero 区 — 更偏生活化叙事 */
+    .hero {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.05);
+      padding: 2.5rem 2rem;
+      margin-bottom: 2.5rem;
+      border: 1px solid #e9edf2;
+      transition: box-shadow 0.2s;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #0b1e33;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero .subhead {
+      font-size: 1.2rem;
+      color: #475569;
+      margin-bottom: 1.2rem;
+      border-left: 4px solid #94a3b8;
+      padding-left: 1rem;
+    }
+
+    .hero p {
+      color: #334155;
+      max-width: 70ch;
+    }
+
+    /* 卡片网格 */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 1.6rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      transition: transform 0.1s ease, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+      transform: translateY(-2px);
+    }
+
+    .card h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: #0f263b;
+    }
+
+    .card h2 span {
+      display: inline-block;
+      background: #eef2f6;
+      border-radius: 30px;
+      padding: 0 0.7rem;
+      font-size: 0.9rem;
+      color: #4a5b6e;
+      font-weight: 400;
+    }
+
+    .card ul, .card ol {
+      padding-left: 1.3rem;
+      color: #334155;
+      margin-top: 0.3rem;
+    }
+
+    .card li {
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      margin-bottom: 0.7rem;
+      color: #2c3e50;
+    }
+
+    .card .note {
+      font-size: 0.95rem;
+      color: #64748b;
+      background: #f8fafc;
+      padding: 0.5rem 0.8rem;
+      border-radius: 12px;
+      border: 1px solid #e9edf2;
+      margin-top: 0.5rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e9edf2;
+      font-size: 0.7rem;
+      letter-spacing: 0.02em;
+      padding: 0.1rem 0.6rem;
+      border-radius: 20px;
+      color: #334155;
+      margin-right: 0.2rem;
+    }
+
+    /* 使用建议 + 延伸阅读 合并卡片 */
+    .wide-card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 2rem 1.8rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      margin-bottom: 2rem;
+    }
+
+    .wide-card h2 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+      color: #0f263b;
+    }
+
+    .flex-suggest {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .flex-suggest > div {
+      flex: 1 1 200px;
+    }
+
+    .flex-suggest h3 {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #1e293b;
+    }
+
+    .inline-link {
+      color: #1f4b7a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+
+    .inline-link:hover {
+      border-bottom-color: #1f4b7a;
+    }
+
+    .faq-mini {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.8rem 2rem;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      margin-bottom: 2rem;
+    }
+
+    .faq-mini h2 {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .faq-item {
+      padding: 0.6rem 0;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: 0;
+    }
+
+    .faq-q {
+      font-weight: 500;
+      margin-bottom: 0.15rem;
+      color: #0b1e33;
+    }
+
+    .faq-a {
+      color: #475569;
+      font-size: 0.96rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #64748b;
+      font-size: 0.9rem;
+      margin-top: 1.8rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #dce1e8;
+    }
+
+    .dot-ornament {
+      color: #94a3b8;
+      margin: 0 0.2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- hero 摘要 + 日常入口 -->
+    <div class="hero">
+      <h1>日常查询 · 对照 · 延伸</h1>
+      <div class="subhead">九游娱乐 · 产品说明式介绍</div>
+      <p>
+        <span class="tag">生活化</span>
+        <span class="tag">轻参考</span>
+        <span class="tag">条目体</span>
+      </p>
+      <p style="margin-top: 1rem;">
+        无论是随手翻阅、对比信息，还是想在闲暇时拓宽阅读范围，<a href="https://webzh-jiuyou.com" class="inline-link">九游娱乐</a> 
+        都可以作为一个内容聚合的起点。这里不替代深度研究，但适合日常查询和对照参考——就像书架上那本经常抽出来翻两页的手边册。
+      </p>
+    </div>
+
+    <!-- 两列卡片：亮点 + 场景 -->
+    <div class="grid-2">
+
+      <!-- 卡片：亮点摘要 -->
+      <div class="card">
+        <h2>✨ 亮点摘要 <span>轻量</span></h2>
+        <ul>
+          <li>信息分类清晰，减少无效浏览；</li>
+          <li>适合快速对照、按需查阅；</li>
+          <li>内容更新平缓，不制造信息焦虑；</li>
+          <li>无弹窗、无强制跳转，浏览节奏自控；</li>
+          <li>页面结构偏向条目式，适合延伸阅读。</li>
+        </ul>
+        <div class="note">📌 如果你习惯先看摘要再深入，这种轻量布局可能更顺手。</div>
+      </div>
+
+      <!-- 卡片：使用场景（日常向） -->
+      <div class="card">
+        <h2>📋 使用场景 <span>对照·延伸</span></h2>
+        <ol>
+          <li><strong>通勤间隙</strong> —— 快速浏览条目，不占用大块注意力；</li>
+          <li><strong>信息对照</strong> —— 同时打开多个页面做横向对比时，简洁版式减少干扰；</li>
+          <li><strong>延伸跳转</strong> —— 从某个兴趣点出发，顺藤摸瓜查找相关内容；</li>
+          <li><strong>轻写作参考</strong> —— 作为日常随笔、笔记的素材收集站。</li>
+        </ol>
+        <p style="margin-top: 0.4rem; font-size: 0.95rem; color: #4a5b6e;">
+          ⚡ 不必刻意安排时间，想到了就打开，像翻一本杂志。
+        </p>
+      </div>
+    </div>
+
+    <!-- 宽卡片：使用建议 + 延伸引导 -->
+    <div class="wide-card">
+      <h2>📎 使用建议 · 延伸阅读</h2>
+      <div class="flex-suggest">
+        <div>
+          <h3>🔹 怎么翻</h3>
+          <p>按兴趣板块浏览，不必从头到尾。遇到感兴趣的标题点进去，不感兴趣就跳过。没有必须完成的指标。</p>
+        </div>
+        <div>
+          <h3>🔸 怎么对照</h3>
+          <p>可以同时打开两三个页面做横向对比。<a href="https://webzh-jiuyou.com" class="inline-link">九游娱乐</a> 的条目结构让对照变得直接。</p>
+        </div>
+        <div>
+          <h3>🔹 延伸阅读</h3>
+          <p>从一处内容出发，利用站内关联或你自己的好奇心，顺藤摸瓜。记得保持开放心态。</p>
+        </div>
+      </div>
+      <p style="margin-top: 1rem; color: #475569; font-size: 0.95rem; border-left: 3px solid #cbd5e1; padding-left: 1rem;">
+        “日常查询并不总是为了找到唯一答案，有时只是为了确认自己没记错，或者获得一个新的切入点。”
+      </p>
+    </div>
+
+    <!-- FAQ 微型卡片（真实克制的说明） -->
+    <div class="faq-mini">
+      <h2>❓ 几个常见疑问</h2>
+      <div class="faq-item">
+        <div class="faq-q">这个网站能替代专业工具吗？</div>
+        <div class="faq-a">不能。它是一个轻量信息聚合页面，适合日常检索和延伸，但不适合作为唯一数据源。重要的决策请多方验证。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">内容更新频率如何？</div>
+        <div class="faq-a">保持平缓节奏，不追求实时。更适合那些不需要秒级更新的日常查询场景。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">是否收集个人浏览数据？</div>
+        <div class="faq-a">页面本身不设置追踪脚本，但浏览器或网络环境可能存在常规日志。如有隐私顾虑，建议使用隐私模式浏览。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">移动端体验怎么样？</div>
+        <div class="faq-a">本页面对手机浏览做了适配，卡片会自动堆叠，字号也相对友好。当然，横屏或平板效果更舒展。</div>
+      </div>
+      <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #64748b;">
+        * 以上说明基于页面当前形态，未来可能调整，请以实际页面为准。
+      </p>
+    </div>
+
+    <!-- 可信但克制的访问说明 -->
+    <div style="background: #ffffff; border-radius: 20px; padding: 1.5rem 2rem; border: 1px solid #e2e8f0; box-shadow: 0 1px 6px rgba(0,0,0,0.02); margin-bottom: 1rem;">
+      <p style="display: flex; align-items: flex-start; gap: 0.6rem; color: #334155;">
+        <span style="font-size: 1.4rem; line-height: 1;">🪶</span>
+        <span>
+          <strong>保持克制的访问说明：</strong> 本页面是 <a href="https://webzh-jiuyou.com" class="inline-link">九游娱乐</a> 的一个静态介绍入口，不提供下载、充值、账号注册或任何需要个人敏感信息的操作。如果你在其他地方看到声称来自本页面的推广链接，请保持警惕。日常浏览时注意辨别信息来源，避免被虚假页面误导。
+        </span>
+      </p>
+    </div>
+
+    <div class="footer-note">
+      <span>56e279deb13473cb · 仅用于内部版本区分</span>
+      <span class="dot-ornament">·</span>
+      <span>产品说明式 · 日常查询与延伸</span>
+    </div>
+
+  </div>
+</body>
+</html>
